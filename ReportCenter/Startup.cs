@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReportCenter.API;
 using ReportCenter.Data;
+using ReportCenter.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,11 @@ namespace ReportCenter
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddSingleton<ILoggedInUserModel, LoggedInUserModel>();
+
+
+            services.AddTransient<IAPIHelper, APIHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

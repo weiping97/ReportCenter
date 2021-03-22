@@ -2,6 +2,7 @@
 
 @using ReportCenter.Data
 @inject WeatherForecastService ForecastService
+@inject IAPIHelper _apiHelper;
 
 <h1>Weather forecast</h1>
 
@@ -42,5 +43,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
+        var test = await _apiHelper.AuthenticateUser("weiping@gmail.com", "P@ssw0rd");
+        var temp = "";
     }
 }
