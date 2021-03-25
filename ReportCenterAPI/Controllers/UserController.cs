@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReportCenterAPI.Data;
+using ReportCenterAPI.Library.DataAccess;
+using ReportCenterAPI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +16,22 @@ namespace ReportCenterAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public UserController(ApplicationDbContext context)
+        private readonly IUserData _userData;
+        public UserController(ApplicationDbContext context,
+            IUserData userData)
         {
             _context = context;
+            _userData = userData;
         }
 
         [HttpGet]
-        [Route("testing")]
-        public IActionResult GetById()
+        [Route("GetUser")]
+        public UserModel GetById()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //db get data
-            return Ok("test good");
+
+            return _userData.GetUserById(userId).First();
+
         }
     }
 }

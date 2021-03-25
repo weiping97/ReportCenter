@@ -7,5 +7,7 @@
     [CreatedDate] DATETIME2 NOT NULL DEFAULT GETUTCDATE(), 
     [CreatedBy] NVARCHAR(128) NOT NULL, 
     [LastModifiedDate] DATETIME2 NULL, 
-    [ModifiedBy] NVARCHAR(128) NULL
+    [ModifiedBy] NVARCHAR(128) NULL,
+    CONSTRAINT [FK_UserProject_ToUser] FOREIGN KEY (UserId) REFERENCES [User](Id),
+    CONSTRAINT [FK_UserProject_ToProject] FOREIGN KEY (ProjectId) REFERENCES [Project](Id)
 )

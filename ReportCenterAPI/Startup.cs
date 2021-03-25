@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ReportCenterAPI.Library.DataAccess;
 
 namespace ReportCenterAPI
 {
@@ -67,6 +68,10 @@ namespace ReportCenterAPI
                         Version = "v1"
                     });
             });
+
+            services.AddTransient<IUserData, UserData>();
+
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
         }
 
