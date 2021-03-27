@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportCenterAPI", "ReportCe
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DAL", "DAL\DAL.sqlproj", "{E51CD61E-B157-403C-BD52-9D7345C3C460}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportCenterAPI.Library", "ReportCenterAPI.Library\ReportCenterAPI.Library.csproj", "{D254BEFB-1308-4A27-BDAA-1567CACB8ADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportCenterAPI.Library", "ReportCenterAPI.Library\ReportCenterAPI.Library.csproj", "{D254BEFB-1308-4A27-BDAA-1567CACB8ADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

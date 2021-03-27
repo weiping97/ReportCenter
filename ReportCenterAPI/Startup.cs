@@ -70,6 +70,8 @@ namespace ReportCenterAPI
             });
 
             services.AddTransient<IUserData, UserData>();
+            services.AddTransient<ICountryData, CountryData>();
+
 
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 

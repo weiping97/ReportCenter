@@ -1,0 +1,21 @@
+﻿@page "/country/create"
+
+@inject ICountryEndpoint _countryEndpoint
+<h3>Create</h3>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        CountryModel model = new CountryModel();
+
+        model.Name = "Malaysia";
+        model.IsActive = true;
+        model.CountryCode = "MY";
+        model.CreatedDate = DateTime.UtcNow;
+
+        await _countryEndpoint.CreateCountryData(model);
+
+        //return base.OnInitializedAsync();
+    }
+}

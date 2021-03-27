@@ -36,6 +36,7 @@ namespace ReportCenter
 
 
             services.AddTransient<IAPIHelper, APIHelper>();
+            services.AddTransient<ICountryEndpoint, CountryEndpoint>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

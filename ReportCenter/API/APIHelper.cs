@@ -21,6 +21,14 @@ namespace ReportCenter.API
             InitializeClient();
         }
 
+        public HttpClient ApiClient
+        {
+            get
+            {
+                return _apiClient;
+            }
+        }
+
         public void InitializeClient()
         {
             string api = _config.GetValue<string>("api");
