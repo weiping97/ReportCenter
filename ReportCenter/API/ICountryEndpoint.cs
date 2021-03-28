@@ -8,5 +8,7 @@ namespace ReportCenter.API
     {
         Task<bool> CreateCountryData(CountryModel item);
         Task<List<CountryModel>> GetAllCountry();
+        Task<CountryModel> GetCountryById(int Id);
+        Task<bool> UpdateCoutryDetail(CountryUpdateModel item);
     }
 }

@@ -30,11 +30,27 @@ namespace ReportCenterAPI.Controllers
             return _countryData.GetAllCountry();
         }
 
+        [HttpGet]
+        [Route("GetCountryById/{Id}")]
+        public CountryModel GetCountryById(int Id)
+        {
+            return _countryData.GetById(Id);
+        }
+
         [HttpPost]
         [Route("CreateCountry")]
         public IActionResult CreateCountry([FromBody]CountryModel item)
         {
             _countryData.SaveCountryData(item);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("UpdateCountry")]
+        public IActionResult UpdateCountry([FromBody]CountryUpdateModel item)
+        {
+            _countryData.UpdateCountryData(item);
 
             return Ok();
         }

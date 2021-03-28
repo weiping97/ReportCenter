@@ -45,5 +45,36 @@ namespace ReportCenter.API
                 }
             }
         }
+
+        public async Task<CountryModel> GetCountryById(int Id)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"/api/Country/GetCountryById/{Id}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<CountryModel>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task<bool> UpdateCoutryDetail(CountryUpdateModel item)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Country/UpdateCountry", item))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

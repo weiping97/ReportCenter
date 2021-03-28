@@ -1,0 +1,85 @@
+﻿@page "/country"
+
+@inject ICountryEndpoint _countryEndpoint
+@inject NavigationManager _navManager
+
+<h3>Country List</h3>
+<br />
+<br />
+
+@if (countryList == null)
+{
+    <h3>Record is loading...</h3>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Is Active</th>
+                <th>Country Code</th>
+                <th>Created Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var country in countryList)
+            {
+                <tr>
+                    <td>@country.Name</td>
+                    <td>@country.IsActive</td>
+                    <td>@country.CountryCode</td>
+                    <td>@country.CreatedDate</td>
+                    <td colspan="2">
+                        <button class="btn btn-primary" @onclick="@(() => HandleEditCountry(country.Id) )">
+                            Edit
+                        </button>
+
+                        @if (confirmDelete)
+                        {
+                            <button class="btn btn-outline-danger" @onclick="(() => HandleDeleteRecord(country.Id))">
+                                Confirm Delete
+                            </button>
+                            <button class="btn btn-secondary" @onclick="(() => confirmDelete = false)">
+                                Cancel
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" @onclick="(() => confirmDelete = true)">
+                                Delete Order
+                            </button>
+                        }
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+}
+
+
+
+@code {
+    private List<CountryModel> countryList;
+
+    private bool confirmDelete = false;
+    private int EditId = 0;
+    protected override async Task OnInitializedAsync()
+
+    {
+        countryList = await _countryEndpoint.GetAllCountry();
+    }
+
+    private void HandleEditCountry(int Id)
+    {
+        _navManager.NavigateTo($"/project/update/{Id}");
+    }
+
+    private void HandleDeleteRecord(int Id)
+    {
+        _navManager.NavigateTo($"/project");
+    }
+}

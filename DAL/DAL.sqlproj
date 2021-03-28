@@ -74,6 +74,8 @@
     <Build Include="dbo\Stored Procedures\uspProject_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\uspCountry_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\uspCountry_SaveData.sql" />
+    <Build Include="dbo\Stored Procedures\uspCountry_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\uspCountry_UpdateData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DAL.refactorlog" />

@@ -1,0 +1,80 @@
+﻿@page "/project/update/{Id:int}"
+
+@inject ICountryEndpoint _countryEndpoint
+@inject NavigationManager _navManager
+
+
+<h3>Update Country Details</h3>
+
+@if (recordNotFound)
+{
+    <h3>No Record Found</h3>
+}
+else if (country is null)
+{
+    <h3>Loading record....</h3>
+}
+else
+{
+<EditForm Model="@updateModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label class="control-label">Name of Country</label>
+        <InputText @bind-Value="updateModel.Name" class="form-control"></InputText>
+        <ValidationMessage For="@(() => updateModel.Name)" class="text-danger" />
+
+        <label class="control-label">Country Code</label>
+        <InputText @bind-Value="updateModel.CountryCode" class="form-control"></InputText>
+        <ValidationMessage For="@(() => updateModel.CountryCode)" class="text-danger" />
+
+        <label class="control-label">Is Active</label>
+        <InputCheckbox @bind-Value="updateModel.IsActive" class="form-control"></InputCheckbox>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Update Country Info" class="btn btn-primary" />
+    </div>
+</EditForm>
+}
+
+
+
+
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+
+    private CountryModel country;
+    private bool recordNotFound = false;
+
+    private CountryUpdateModel updateModel = new CountryUpdateModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        country = await _countryEndpoint.GetCountryById(Id);
+
+        if (country != null)
+        {
+            updateModel.Id = country.Id;
+            updateModel.Name = country.Name;
+            updateModel.CountryCode = country.CountryCode;
+            updateModel.IsActive = country.IsActive;
+        }
+        else
+        {
+            recordNotFound = true;
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await _countryEndpoint.UpdateCoutryDetail(updateModel);
+        _navManager.NavigateTo("/country");
+    }
+
+}
