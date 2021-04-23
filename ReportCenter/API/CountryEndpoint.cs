@@ -76,5 +76,21 @@ namespace ReportCenter.API
                 }
             }
         }
+
+        public async Task<bool> DeleteCountryById(int Id)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"/api/Country/DeleteCountryById/{Id}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                   
+                    return true;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

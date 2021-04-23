@@ -33,9 +33,7 @@ namespace ReportCenterAPI.Library.DataAccess
             var p = new
             {
                 Name = item.Name,
-                IsActive = item.IsActive,
-                CountryCode = item.CountryCode,
-                CreatedDate = item.CreatedDate
+                CountryCOde = item.CountryCode
             };
 
             _sql.SaveData<dynamic>("dbo.uspCountry_SaveData", p, "ReportCenterDB");
@@ -52,6 +50,11 @@ namespace ReportCenterAPI.Library.DataAccess
             };
 
             _sql.SaveData<dynamic>("dbo.uspCountry_UpdateData", p, "ReportCenterDB");
+        }
+
+        public void DeleteCountryData(int Id)
+        {
+            _sql.SaveData<dynamic>("dbo.uspCountry_DeleteById", new { Id = Id }, "ReportCenterDB");
         }
     }
 }

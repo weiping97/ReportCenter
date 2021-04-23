@@ -13,6 +13,10 @@
 }
 else
 {
+    <button class="btn btn-primary" @onclick="HandleCreateCountry">
+        Add New Country
+    </button>
+    
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -31,7 +35,7 @@ else
                     <td>@country.IsActive</td>
                     <td>@country.CountryCode</td>
                     <td>@country.CreatedDate</td>
-                    <td colspan="2">
+                    <td colspan="3">
                         <button class="btn btn-primary" @onclick="@(() => HandleEditCountry(country.Id) )">
                             Edit
                         </button>
@@ -48,7 +52,7 @@ else
                         else
                         {
                             <button class="btn btn-danger" @onclick="(() => confirmDelete = true)">
-                                Delete Order
+                                Delete Country
                             </button>
                         }
                     </td>
@@ -73,13 +77,26 @@ else
         countryList = await _countryEndpoint.GetAllCountry();
     }
 
-    private void HandleEditCountry(int Id)
+    private void HandleCreateCountry()
     {
-        _navManager.NavigateTo($"/project/update/{Id}");
+        _navManager.NavigateTo("/country/create");
     }
 
-    private void HandleDeleteRecord(int Id)
+    private void HandleEditCountry(int Id)
     {
-        _navManager.NavigateTo($"/project");
+        _navManager.NavigateTo($"/country/update/{Id}");
+    }
+
+    private async Task HandleDeleteRecord(int Id)
+    {
+        await _countryEndpoint.DeleteCountryById(Id);
+
+        countryList.Clear();
+        countryList = await _countryEndpoint.GetAllCountry();
+
+        EditId = 0;
+        confirmDelete = false;
+
+        StateHasChanged();
     }
 }

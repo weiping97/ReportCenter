@@ -54,5 +54,13 @@ namespace ReportCenterAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("DeleteCountryById/{Id}")]
+        public IActionResult DeleteCountryById(int Id)
+        {
+            _countryData.DeleteCountryData(Id);
+            return Ok();
+        }
     }
 }
